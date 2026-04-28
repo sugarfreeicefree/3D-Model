@@ -1,42 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>BabylonJS Viewer - Basic usage</title>
-        <style>
-			.viewerContainer {
-                width: 400px;
-                height: 500px;				
-				image-rendering: pixelated; /* to prevent blury when zoomed out */
-			}
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>Navbar Viewer</title>
 
-        </style>
-		<script src="https://cdn.babylonjs.com/viewer/babylon.viewer.js"></script>
-	<script>
-		function loadit(modelUrl) {
-			if(modelUrl) {
-				let viewer = BabylonViewer.viewerManager.getViewerById('viewerID');
-				let temp = viewer.templateManager.getTemplate('navBar');
-				let param= temp._configuration;
-				param.params.hideVr=false;
-                param.params.disableOnFullscreen=true;
-				temp.updateParams(param);
-				viewer.loadModel(modelUrl)
-			}
-		}
-	</script>
+<script src="https://cdn.babylonjs.com/viewer/babylon.viewer.js"></script>
+
+<style>
+body {
+    font-family: Arial;
+    background: #f5f5f5;
+    text-align: center;
+    padding: 40px;
+}
+
+.container {
+    background: white;
+    padding: 20px;
+    width: 600px;
+    max-width: 90%;
+    margin: auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+select {
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+babylon {
+    width: 100%;
+    height: 400px;
+    display: block;
+}
+
+a {
+    display: block;
+    margin-top: 15px;
+    color: #ff7f50;
+    text-decoration: none;
+}
+</style>
+
+<script>
+function loadit(modelUrl) {
+    if(modelUrl) {
+        let viewer = BabylonViewer.viewerManager.getViewerById('viewerID');
+        let temp = viewer.templateManager.getTemplate('navBar');
+        let param = temp._configuration;
+
+        param.params.hideVr = false;
+        param.params.disableOnFullscreen = true;
+
+        temp.updateParams(param);
+        viewer.loadModel(modelUrl)
+    }
+}
+</script>
+
 </head>
-<body>
-<select onchange="loadit(this.value)">
-	<option value="./models/yamaguchi.glb">貓貓嘴小忠</option>
-	<option value="./models/plate.glb">疑似盤子</option>
-	<option value="./models/figure.glb">會動的人</option>
-</select>
-<div class='viewerContainer'>
-	<babylon id="viewerID"><vr></vr></babylon>
-</div>
-</body>
 
+<body>
+
+<h1>Navbar Viewer</h1>
+
+<div class="container">
+
+<select onchange="loadit(this.value)">
+    <option value="./models/yamaguchi.glb">貓貓嘴小忠</option>
+    <option value="./models/plate.glb">疑似盤子</option>
+    <option value="./models/figure.glb">會動的人</option>
+</select>
+
+<babylon id="viewerID"><vr></vr></babylon>
+
+<a href="index.html">← 回首頁</a>
+
+</div>
+
+</body>
 </html>
